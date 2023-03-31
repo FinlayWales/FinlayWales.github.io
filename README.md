@@ -1,1 +1,1 @@
-# [oricalu.gay](www.oricalu.gay)
+# [oricalu.gay](https://www.oricalu.gay)
