@@ -6,29 +6,31 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
 	<meta name="description" content="" />
 	<link rel="icon" href="favicon.png">
-	<style>
-		#grad1 {
-			background: red;
-			background: -webkit-linear-gradient(left, red, orange , yellow, green, blue, purple);
-			background: -o-linear-gradient(right, red, orange, yellow, green, blue, purple);
-			background: -moz-linear-gradient(right, red, orange, yellow, green, blue, purple);
-			background: linear-gradient(to right, red, orange , yellow, green, blue, purple);
-			-webkit-background-clip: text;
-			-webkit-text-fill-color: transparent;
-			font-size: 20vw;
-		}
-		body {
-			background: LightGray;
-		}
-	</style>
+	<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-	<p>I made a fuckign...</p>
-	<h1>Webbed Site!</h1>
-	<p>wahoo</p>
-	<br />
-	<p>and its...</p>
-	<h1 id="grad1">GAY!!!!!!!!</p>
+	<div id="container">
+		<div id="side-menu">
+			<a href="/it"><div class="menu-item">Initiative Tracker</div></a>
+		</div>
+		<div id="main-container">
+			<div id="header">
+				<div id="menu-btn">
+					<input type="checkbox" id="nav-menu1">
+					<label id="nav-icon1" for="nav-menu1">
+						<span></span>
+						<span></span>
+						<span></span>
+					</label>
+				</div>
+				<h1 id="title">Oricalu</h1>
+			</div>
+			<div id="body">
+				Body
+			</div>
+		</div>
+	</div>
+	<script src="script.js"></script>
 </body>
 </html>
