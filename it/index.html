@@ -10,7 +10,25 @@
 </head>
 
 <body>
-	<p>test</p>
+	<div id="container">
+		<header class="flex">
+			<h1>Initiative Tracker</h1>
+			<div class="flex" id="roundcounter">
+				<h2 id="round">Round 1</h2>
+				<img src="assets/edit.png" id="editround" alt="Edit Round Number" title="Edit Round Number" />
+			</div>
+			<div id="spacer"></div>
+			<div class="flex" id="endbtn">
+				<button id="nextturn" class="headerbtn"><img src="assets/next.png" alt="Next Turn" title="Next Turn" /></button>
+				<button id="add" class="headerbtn"><img src="assets/add.png" alt="Add Initiative" title="Add Initiative" /></button>
+				<button id="sort" class="headerbtn"><img src="assets/sort.png" alt="Sort by Initiative" title="Sort by Initiative" /></button>
+				<button id="clear" class="headerbtn"><img src="assets/clear.png" alt="Clear Initiative" title="Clear Initiative" /></button>
+			</div>
+		</header>
+		<div id="initiatives">
+			
+		</div>
+	</div>
 	<script src="script.js"></script>
 </body>
 </html>
