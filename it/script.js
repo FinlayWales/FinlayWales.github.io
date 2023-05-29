@@ -1,22 +1,35 @@
 /*
 
 TODO:
- - Mark as dead (auto)
- - Hurt/Heal buttons
  - Draggable initiatives
      - Must update array order
  - Turn and round counter
      - Highlight current initiative
- - Condition tracker
- - Bloodied tracker
- - Better player/enemy indicators. Person icon & monster icon (skull icon for dead?)
  - Make the whole thing less gray
 
 */
 
 let initiatives_arr = [];
 
-function Initiative(uuid, is_player, is_edit, init_num, display_name, max_hp, current_hp, ac_num, notes_open, notes) {
+function Conditions(blinded, charmed, deafened, frightened, grappled, incapacitated, invisible, paralyzed, petrified, poisoned, prone, restrained, stunned, unconscious, exhaustion_level) {
+    this.blinded = blinded;
+    this.charmed = charmed;
+    this.deafened = deafened;
+    this.frightened = frightened;
+    this.grappled = grappled;
+    this.incapacitated = incapacitated;
+    this.invisible = invisible;
+    this.paralyzed = paralyzed;
+    this.petrified = petrified;
+    this.poisoned = poisoned;
+    this.prone = prone;
+    this.restrained = restrained;
+    this.stunned = stunned;
+    this.unconscious = unconscious;
+    this.exhaustion_level = exhaustion_level;
+}
+
+function Initiative(uuid, is_player, is_edit, init_num, display_name, max_hp, current_hp, ac_num, conditions_obj, notes_open, notes) {
     this.uuid = uuid;
     this.is_player = is_player;
     this.is_edit = is_edit;
@@ -25,8 +38,13 @@ function Initiative(uuid, is_player, is_edit, init_num, display_name, max_hp, cu
     this.max_hp = max_hp;
     this.current_hp = current_hp;
     this.ac_num = ac_num;
+    this.conditions_obj = conditions_obj;
     this.notes_open = notes_open;
     this.notes = notes;
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 function edit_initiative(e, uuid) {
@@ -127,9 +145,9 @@ function update_html() {
             let player_temp = document.createElement("img");
             player_temp.className = "init-subitem";
             if (initiatives_arr[i].is_player == true) {
-                player_temp.src = "assets/p.png";
+                player_temp.src = "assets/player.png";
             } else {
-                player_temp.src = "assets/e.png";
+                player_temp.src = "assets/enemy.png";
             }
             init_div.appendChild(player_temp);
 
@@ -154,8 +172,31 @@ function update_html() {
             curhp_input.className = "init-inputs";
             curhp_input.style.textAlign = "right";
             curhp_input.style.fontSize = "25px";
+            curhp_input.setAttribute("type", "number");
             curhp_input.setAttribute('value', initiatives_arr[i].current_hp);
-            curhp_input.addEventListener("input", function () {initiatives_arr[i].current_hp = parseInt(curhp_input.value)});
+            curhp_input.addEventListener("input", function () {
+                initiatives_arr[i].current_hp = parseInt(curhp_input.value);
+                // set icon source again so it gets updates on hp input, rather than only when update_html is called.
+                // avove is actually redundant in every case except initial creation as input event hasn't fired yet.
+                if (initiatives_arr[i].current_hp <= 0) {
+                    player_temp.src = "assets/dead.png";
+                } else if (initiatives_arr[i].is_player == true) {
+                    player_temp.src = "assets/player.png";
+                } else {
+                    player_temp.src = "assets/enemy.png";
+                }
+
+                if (initiatives_arr[i].current_hp <= 0) {
+                    //dead
+                    parent_div.style.backgroundImage = "linear-gradient(#B0B0B0, #0F0F0F)";
+                } else if (initiatives_arr[i].current_hp <= initiatives_arr[i].max_hp / 2) {
+                    //bloodied
+                    parent_div.style.backgroundImage = "linear-gradient(#B0B0B0 0%, #B0B0B0 25%, #ca7575 70%, #e53b3b 100%)";
+                } else {
+                    //chillin
+                    parent_div.style.backgroundImage = "none";
+                }
+            });
 
             // Reason for this horribleness: https://stackoverflow.com/questions/2684956/addeventlistener-gone-after-appending-innerhtml
             let curhp_front = document.createElement("div");
@@ -215,13 +256,48 @@ function update_html() {
         let reorder_img = document.createElement("img");
         reorder_img.src = "assets/reorder.png"
         reorder_btn.appendChild(reorder_img);
-        reorder_btn.addEventListener("click", reorder_initiative.bind(null, event, initiatives_arr[i].uuid))
+        reorder_btn.addEventListener("mousedown", reorder_initiative.bind(null, event, initiatives_arr[i].uuid))
         buttons_div.appendChild(reorder_btn);
 
         init_div.appendChild(buttons_div);
         parent_div.appendChild(init_div);
 
         if (initiatives_arr[i].notes_open == true) {
+            let conditions_temp = document.createElement("div");
+            conditions_temp.className = "flex";
+            conditions_temp.style.marginTop = "20px";
+            conditions_temp.style.justifyContent = "space-between";
+
+            for (let [key, value] of Object.entries(initiatives_arr[i].conditions_obj)) {
+                if (key == "exhaustion_level") {
+                    let condition_input = document.createElement("input");
+                    condition_input.setAttribute("type", "number");
+                    condition_input.setAttribute("min", "0");
+                    condition_input.setAttribute("max", "6");
+                    condition_input.style.width = "2em"
+                    condition_input.value = value;
+                    condition_input.addEventListener("input", function () {initiatives_arr[i].conditions_obj[key] = parseint(condition_input.value)})
+
+                    let condition_label = document.createElement("label");
+                    condition_label.style.fontSize = "15px";
+                    condition_label.innerHTML = "Exhaustion";
+                    condition_label.appendChild(condition_input);
+                    conditions_temp.appendChild(condition_label);
+                } else {
+                    let condition_input = document.createElement("input");
+                    condition_input.setAttribute("type", "checkbox");
+                    condition_input.checked = value;
+                    condition_input.addEventListener("input", function () {initiatives_arr[i].conditions_obj[key] = condition_input.checked})
+
+                    let condition_label = document.createElement("label");
+                    condition_label.style.fontSize = "15px";
+                    condition_label.innerHTML = capitalizeFirstLetter(key);
+                    condition_label.appendChild(condition_input);
+                    conditions_temp.appendChild(condition_label);
+                }
+            }
+            parent_div.appendChild(conditions_temp);
+
             let notes_input = document.createElement("textarea");
             notes_input.style.fontSize = "15px";
             notes_input.style.width = "100%";
@@ -239,7 +315,7 @@ function update_html() {
 }
 
 function addinit_func() {
-    initiatives_arr.push(new Initiative(self.crypto.randomUUID(), true, true, 0, "", 0, 0, 0, false, ""));
+    initiatives_arr.push(new Initiative(self.crypto.randomUUID(), true, true, 0, "", 0, 0, 0, new Conditions(false, false, false, false, false, false, false, false, false, false, false, false, false, false, 0), false, ""));
     update_html();
 }
 
