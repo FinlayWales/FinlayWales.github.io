@@ -1,17 +1,16 @@
 /*
 
 TODO:
- - Mark as dead
+ - Mark as dead (auto)
  - Hurt/Heal buttons
- - AC
  - Draggable initiatives
      - Must update array order
  - Turn and round counter
      - Highlight current initiative
  - Condition tracker
  - Bloodied tracker
+ - Better player/enemy indicators. Person icon & monster icon (skull icon for dead?)
  - Make the whole thing less gray
-
 */
 
 let initiatives_arr = [];
