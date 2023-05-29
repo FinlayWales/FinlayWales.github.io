@@ -61,14 +61,11 @@ a:link, a:visited, a:hover, a:active {
     text-decoration: none;
 }
 
-button, input {
+button, input, textarea {
     border-radius: 0px;
     border: 1px solid black;
     background: #F0F0F0;
 }
-
-input[type="checkbox"] {display: none;}
-input[type="checkbox"]:checked ~ label {text-decoration:line-through;text-decoration-thickness:2px;}
 
 button:hover {
     background: #E0E0E0;
@@ -85,10 +82,13 @@ button:hover {
     flex-grow: 100;
 }
 
-.inits {
+.initparent {
     background-color: #B0B0B0;
     padding: 20px;
     margin: 20px;
+}
+
+.inits {
     display: flex;
     flex-direction: row;
     align-items: center;
