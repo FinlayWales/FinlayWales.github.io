@@ -1,6 +1,9 @@
 /*
 
 TODO:
+ - Mark as dead
+ - Hurt/Heal buttons
+ - AC
  - Draggable initiatives
      - Must update array order
  - Turn and round counter
@@ -13,7 +16,7 @@ TODO:
 
 let initiatives_arr = [];
 
-function Initiative(uuid, is_player, is_edit, init_num, display_name, max_hp, current_hp, notes_open, notes) {
+function Initiative(uuid, is_player, is_edit, init_num, display_name, max_hp, current_hp, ac_num, notes_open, notes) {
     this.uuid = uuid;
     this.is_player = is_player;
     this.is_edit = is_edit;
@@ -21,6 +24,7 @@ function Initiative(uuid, is_player, is_edit, init_num, display_name, max_hp, cu
     this.display_name = display_name;
     this.max_hp = max_hp;
     this.current_hp = current_hp;
+    this.ac_num = ac_num;
     this.notes_open = notes_open;
     this.notes = notes;
 }
@@ -69,10 +73,8 @@ function update_html() {
         if (initiatives_arr[i].is_edit == true) {
 
             let player_temp = document.createElement("div");
-            player_temp.className = "flex";
+            player_temp.className = "init-subitem";
             let player_input = document.createElement("input");
-            let player_img = document.createElement("div");
-            player_input.className = "checkbox";
             player_input.setAttribute('type', 'checkbox');
             player_input.checked = initiatives_arr[i].is_player;
             player_input.addEventListener("input", function () {initiatives_arr[i].is_player = player_input.checked});
@@ -80,10 +82,20 @@ function update_html() {
             player_temp.appendChild(player_input);
             init_div.appendChild(player_temp);
 
+            let ac_temp = document.createElement("div");
+            ac_temp.className = "init-subitem";
+            let ac_input = document.createElement("input");
+            ac_input.className = "init-inputs";
+            ac_input.setAttribute('value', initiatives_arr[i].ac_num);
+            ac_input.addEventListener("input", function () {initiatives_arr[i].ac_num = parseInt(ac_input.value)});
+            ac_temp.innerHTML = "AC: "
+            ac_temp.appendChild(ac_input);
+            init_div.appendChild(ac_temp);
+
             let init_temp = document.createElement("div");
-            init_temp.classinit = "flex";
+            init_temp.className = "init-subitem";
             let init_input = document.createElement("input");
-            init_input.style.fontSize = "25px";
+            init_input.className = "init-inputs";
             init_input.setAttribute('value', initiatives_arr[i].init_num);
             init_input.addEventListener("input", function () {initiatives_arr[i].init_num = parseInt(init_input.value)});
             init_temp.innerHTML = "Initiative: "
@@ -91,9 +103,9 @@ function update_html() {
             init_div.appendChild(init_temp);
 
             let name_temp = document.createElement("div");
-            name_temp.className = "flex";
+            name_temp.className = "init-subitem";
             let name_input = document.createElement("input");
-            name_input.style.fontSize = "25px";
+            name_input.className = "init-inputs";
             name_input.setAttribute('value', initiatives_arr[i].display_name);
             name_input.addEventListener("input", function () {initiatives_arr[i].display_name = name_input.value});
             name_temp.innerHTML = "Name: "
@@ -101,9 +113,9 @@ function update_html() {
             init_div.appendChild(name_temp);
 
             let hp_temp = document.createElement("div");
-            hp_temp.classhp = "flex";
+            hp_temp.className = "init-subitem";
             let hp_input = document.createElement("input");
-            hp_input.style.fontSize = "25px";
+            hp_input.className = "init-inputs";
             hp_input.setAttribute('value', initiatives_arr[i].max_hp);
             hp_input.addEventListener("input", function () {initiatives_arr[i].max_hp = parseInt(hp_input.value)});
             hp_temp.innerHTML = "HP: "
@@ -113,6 +125,7 @@ function update_html() {
         } else {
 
             let player_temp = document.createElement("img");
+            player_temp.className = "init-subitem";
             if (initiatives_arr[i].is_player == true) {
                 player_temp.src = "assets/p.png";
             } else {
@@ -120,17 +133,25 @@ function update_html() {
             }
             init_div.appendChild(player_temp);
 
+            let ac_temp = document.createElement("div");
+            ac_temp.className = "init-subitem";
+            ac_temp.innerText = "AC: " + initiatives_arr[i].ac_num;
+            init_div.appendChild(ac_temp);
+
             let init_temp = document.createElement("div");
+            init_temp.className = "init-subitem";
             init_temp.innerText = "Initiative: " + initiatives_arr[i].init_num;
             init_div.appendChild(init_temp);
 
             let name_temp = document.createElement("div");
+            name_temp.className = "init-subitem";
             name_temp.innerText = "Name: " + initiatives_arr[i].display_name;
             init_div.appendChild(name_temp);
 
             let curhp_temp = document.createElement("div");
-            curhp_temp.className = "flex";
+            curhp_temp.className = "init-subitem";
             let curhp_input = document.createElement("input");
+            curhp_input.className = "init-inputs";
             curhp_input.style.textAlign = "right";
             curhp_input.style.fontSize = "25px";
             curhp_input.setAttribute('value', initiatives_arr[i].current_hp);
@@ -218,7 +239,7 @@ function update_html() {
 }
 
 function addinit_func() {
-    initiatives_arr.push(new Initiative(self.crypto.randomUUID(), true, true, 0, "", 0, 0, false, ""));
+    initiatives_arr.push(new Initiative(self.crypto.randomUUID(), true, true, 0, "", 0, 0, 0, false, ""));
     update_html();
 }
 
