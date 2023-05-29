@@ -19,6 +19,7 @@ input, label {
 }
 
 header {
+    flex-shrink: 0;
     background-color: lightgray;
     height: 100px;
     padding: 10px;

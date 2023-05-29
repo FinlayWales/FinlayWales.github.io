@@ -11,6 +11,7 @@ TODO:
  - Bloodied tracker
  - Better player/enemy indicators. Person icon & monster icon (skull icon for dead?)
  - Make the whole thing less gray
+
 */
 
 let initiatives_arr = [];
