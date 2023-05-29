@@ -1,4 +1,15 @@
-// Fuck you
+/*
+
+TODO:
+ - Draggable initiatives
+     - Must update array order
+ - Turn and round counter
+     - Highlight current initiative
+ - Condition tracker
+ - Bloodied tracker
+ - Make the whole thing less gray
+
+*/
 
 let initiatives_arr = [];
 
