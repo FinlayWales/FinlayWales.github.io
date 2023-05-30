@@ -1,8 +1,6 @@
 /*
 
 TODO:
- - Draggable initiatives
-     - Must update array order
  - Turn and round counter
      - Highlight current initiative
  - Make the whole thing less gray
@@ -47,14 +45,47 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+/*
+function dragElement(parent, elmnt, button) {
+    var pos = 0;
+    button.addEventListener("mousedown", dragMouseDown);
+
+    function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        elmnt.style.position = "relative";
+        elmnt.style.zIndex = "1";
+        pos = e.clientY;
+        document.addEventListener("mouseup", closeDragElement);
+        document.addEventListener("mousemove", elementDrag);
+    }
+
+    function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        elmnt.style.top = (e.clientY - pos) + "px";
+    }
+
+    function closeDragElement() {
+        elmnt.style.position = "static";
+        elmnt.style.top = "0px";
+        elmnt.style.zIndex = "0";
+        document.removeEventListener("mouseup", closeDragElement);
+        document.removeEventListener("mousemove", elementDrag);
+    }
+}
+*/
+
 function edit_initiative(e, uuid) {
     let init_item = initiatives_arr.find(initiatives_arr => initiatives_arr.uuid === uuid);
     initiatives_arr[initiatives_arr.indexOf(init_item)].is_edit = true;
     update_html();
 }
 
-function reorder_initiative(e, uuid) {
-    console.log("reorder: " + uuid)
+function reorder_initiative(e) {
+    let reorder_item = initiatives_arr[e.oldIndex];
+    initiatives_arr.splice(e.oldIndex, 1);
+    initiatives_arr.splice(e.newIndex, 0, reorder_item);
 }
 
 function confirm_initiative(e, uuid) {
@@ -253,10 +284,10 @@ function update_html() {
         buttons_div.appendChild(delete_btn);
 
         let reorder_btn = document.createElement("button");
+        reorder_btn.className = "reorderbtn";
         let reorder_img = document.createElement("img");
         reorder_img.src = "assets/reorder.png"
         reorder_btn.appendChild(reorder_img);
-        reorder_btn.addEventListener("mousedown", reorder_initiative.bind(null, event, initiatives_arr[i].uuid))
         buttons_div.appendChild(reorder_btn);
 
         init_div.appendChild(buttons_div);
@@ -308,10 +339,13 @@ function update_html() {
             notes_input.addEventListener("input", function () {initiatives_arr[i].notes = notes_input.value});
             parent_div.appendChild(notes_input);
         }
-
         initiatives_elem.appendChild(parent_div);
-
     }
+    new Sortable(initiatives_elem, {
+        animation: 150,
+        handle: ".reorderbtn",
+        onEnd: reorder_initiative
+    });
 }
 
 function addinit_func() {

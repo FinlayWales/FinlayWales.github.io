@@ -90,7 +90,7 @@ button:hover {
 }
 
 .inits {
-    display: flex;
+    display: flex !important;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
