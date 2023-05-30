@@ -1,13 +1,7 @@
-/*
-
-TODO:
- - Turn and round counter
-     - Highlight current initiative
- - Make the whole thing less gray
-
-*/
-
 let initiatives_arr = [];
+
+let turn_index = 0;
+let round_counter = 1;
 
 function Conditions(blinded, charmed, deafened, frightened, grappled, incapacitated, invisible, paralyzed, petrified, poisoned, prone, restrained, stunned, unconscious, exhaustion_level) {
     this.blinded = blinded;
@@ -44,37 +38,6 @@ function Initiative(uuid, is_player, is_edit, init_num, display_name, max_hp, cu
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
-
-/*
-function dragElement(parent, elmnt, button) {
-    var pos = 0;
-    button.addEventListener("mousedown", dragMouseDown);
-
-    function dragMouseDown(e) {
-        e = e || window.event;
-        e.preventDefault();
-        elmnt.style.position = "relative";
-        elmnt.style.zIndex = "1";
-        pos = e.clientY;
-        document.addEventListener("mouseup", closeDragElement);
-        document.addEventListener("mousemove", elementDrag);
-    }
-
-    function elementDrag(e) {
-        e = e || window.event;
-        e.preventDefault();
-        elmnt.style.top = (e.clientY - pos) + "px";
-    }
-
-    function closeDragElement() {
-        elmnt.style.position = "static";
-        elmnt.style.top = "0px";
-        elmnt.style.zIndex = "0";
-        document.removeEventListener("mouseup", closeDragElement);
-        document.removeEventListener("mousemove", elementDrag);
-    }
-}
-*/
 
 function edit_initiative(e, uuid) {
     let init_item = initiatives_arr.find(initiatives_arr => initiatives_arr.uuid === uuid);
@@ -115,6 +78,11 @@ function update_html() {
     for (let i = 0; i < initiatives_arr.length; i++) {
         let parent_div = document.createElement("div");
         parent_div.className = "initparent";
+        if (i == turn_index) {
+            parent_div.style.border = "3px solid red";
+        } else {
+            parent_div.style.border = "none";
+        }
         let init_div = document.createElement("div");
         init_div.className = "inits";
         init_div.style.fontSize = "25px";
@@ -348,6 +316,36 @@ function update_html() {
     });
 }
 
+function nextturn_func() {
+    if (turn_index >= initiatives_arr.length - 1) {
+        turn_index = 0;
+        round_counter += 1;
+        round_display.innerText = "Round " + round_counter;
+    } else {
+        turn_index += 1;
+    }
+    update_html();
+}
+
+function editround_func() {
+    if (round_is_edit== true) {
+        round_edit.src = "assets/edit.png";
+        round_display.innerText = "Round " + round_counter;
+        round_is_edit = false;
+    } else {
+        round_display.innerText = "Round ";
+        round_edit.src = "assets/done.png";
+        let round_input = document.createElement("input");
+        round_input.setAttribute("type", "number");
+        round_input.setAttribute("min", "0");
+        round_input.style.width = "2.5em";
+        round_input.value = round_counter;
+        round_input.addEventListener("input", function () {round_counter = parseInt(round_input.value)});
+        round_display.appendChild(round_input);
+        round_is_edit = true;
+    }
+}
+
 function addinit_func() {
     initiatives_arr.push(new Initiative(self.crypto.randomUUID(), true, true, 0, "", 0, 0, 0, new Conditions(false, false, false, false, false, false, false, false, false, false, false, false, false, false, 0), false, ""));
     update_html();
@@ -366,10 +364,19 @@ function clearinit_func() {
 }
 
 let initiatives_elem = document.getElementById("initiatives");
+
+let round_display = document.getElementById("round");
+let round_edit = document.getElementById("editround");
+let round_is_edit = false;
+
+let nextturn = document.getElementById("nextturn");
 let addinit = document.getElementById("add");
 let sortinit = document.getElementById("sort");
 let clearinit = document.getElementById("clear");
 
+round_edit.addEventListener("click", editround_func);
+
+nextturn.addEventListener("click", nextturn_func);
 addinit.addEventListener("click", addinit_func);
 sortinit.addEventListener("click", sortinit_func);
 clearinit.addEventListener("click", clearinit_func);

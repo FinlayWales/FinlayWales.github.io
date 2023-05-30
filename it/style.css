@@ -35,6 +35,10 @@ header > * {
     padding-left: 20px;
 }
 
+#round {
+    white-space: pre;
+}
+
 #spacer {
     flex-grow: 100;
 }
@@ -90,7 +94,7 @@ button:hover {
 }
 
 .inits {
-    display: flex !important;
+    display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
