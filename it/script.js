@@ -148,6 +148,17 @@ function update_html() {
             } else {
                 player_temp.src = "assets/enemy.png";
             }
+
+            if (initiatives_arr[i].current_hp <= 0) {
+                //dead
+                parent_div.style.backgroundImage = "linear-gradient(#B0B0B0, #0F0F0F)";
+            } else if (initiatives_arr[i].current_hp <= initiatives_arr[i].max_hp / 2) {
+                //bloodied
+                parent_div.style.backgroundImage = "linear-gradient(#B0B0B0 0%, #B0B0B0 25%, #ca7575 70%, #e53b3b 100%)";
+            } else {
+                //chillin
+                parent_div.style.backgroundImage = "none";
+            }
             init_div.appendChild(player_temp);
 
             let ac_temp = document.createElement("div");
