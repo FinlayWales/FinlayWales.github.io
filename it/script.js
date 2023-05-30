@@ -54,6 +54,9 @@ function reorder_initiative(e) {
 function confirm_initiative(e, uuid) {
     let init_item = initiatives_arr.find(initiatives_arr => initiatives_arr.uuid === uuid);
     initiatives_arr[initiatives_arr.indexOf(init_item)].is_edit = false;
+    if (initiatives_arr[initiatives_arr.indexOf(init_item)].current_hp == null) {
+        initiatives_arr[initiatives_arr.indexOf(init_item)].current_hp = initiatives_arr[initiatives_arr.indexOf(init_item)].max_hp;
+    }
     update_html();
 }
 
@@ -151,7 +154,7 @@ function update_html() {
 
             if (initiatives_arr[i].current_hp <= 0) {
                 //dead
-                parent_div.style.backgroundImage = "linear-gradient(#B0B0B0, #0F0F0F)";
+                parent_div.style.backgroundImage = "linear-gradient(#B0B0B0, #3F3F3F)";
             } else if (initiatives_arr[i].current_hp <= initiatives_arr[i].max_hp / 2) {
                 //bloodied
                 parent_div.style.backgroundImage = "linear-gradient(#B0B0B0 0%, #B0B0B0 25%, #ca7575 70%, #e53b3b 100%)";
@@ -198,7 +201,7 @@ function update_html() {
 
                 if (initiatives_arr[i].current_hp <= 0) {
                     //dead
-                    parent_div.style.backgroundImage = "linear-gradient(#B0B0B0, #0F0F0F)";
+                    parent_div.style.backgroundImage = "linear-gradient(#B0B0B0, #3F3F3F)";
                 } else if (initiatives_arr[i].current_hp <= initiatives_arr[i].max_hp / 2) {
                     //bloodied
                     parent_div.style.backgroundImage = "linear-gradient(#B0B0B0 0%, #B0B0B0 25%, #ca7575 70%, #e53b3b 100%)";
@@ -358,7 +361,7 @@ function editround_func() {
 }
 
 function addinit_func() {
-    initiatives_arr.push(new Initiative(self.crypto.randomUUID(), true, true, 0, "", 0, 0, 0, new Conditions(false, false, false, false, false, false, false, false, false, false, false, false, false, false, 0), false, ""));
+    initiatives_arr.push(new Initiative(self.crypto.randomUUID(), true, true, 0, "", 0, null, 0, new Conditions(false, false, false, false, false, false, false, false, false, false, false, false, false, false, 0), false, ""));
     update_html();
 }
 
