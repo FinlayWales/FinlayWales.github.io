@@ -117,7 +117,7 @@ function update_html() {
             let init_input = document.createElement("input");
             init_input.className = "init-inputs";
             init_input.setAttribute('value', initiatives_arr[i].init_num);
-            init_input.addEventListener("input", function () {initiatives_arr[i].init_num = parseInt(init_input.value)});
+            init_input.addEventListener("input", function () {initiatives_arr[i].init_num = parseFloat(init_input.value)});
             init_temp.innerHTML = "Initiative: "
             init_temp.appendChild(init_input);
             init_div.appendChild(init_temp);
@@ -289,7 +289,7 @@ function update_html() {
                     condition_input.setAttribute("max", "6");
                     condition_input.style.width = "2em"
                     condition_input.value = value;
-                    condition_input.addEventListener("input", function () {initiatives_arr[i].conditions_obj[key] = parseint(condition_input.value)})
+                    condition_input.addEventListener("input", function () {initiatives_arr[i].conditions_obj[key] = parseInt(condition_input.value)})
 
                     let condition_label = document.createElement("label");
                     condition_label.style.fontSize = "15px";
