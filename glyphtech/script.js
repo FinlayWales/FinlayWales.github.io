@@ -205,7 +205,7 @@ drawHexGrid(Hex_Grid);
 
 for (var i = 0; i < Hex_Positions.length; i++) {
     if (Hex_Positions[i]) {
-        Hex_Rotations[i] = 0;//Math.floor(Math.random() * 6);
+        Hex_Rotations[i] = Math.floor(Math.random() * 6);
     }
 }
 
