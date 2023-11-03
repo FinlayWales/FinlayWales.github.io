@@ -137,7 +137,7 @@ function drawHexGrid(Hex_Grid) {
     for (var i = 0; i < Hex_Grid.length; i++) {
         for (var j = 0; j < Hex_Grid[i].length; j++) {
             if (Hex_Grid[i][j]) {
-                var x = (1.5 * r * j) + r;
+                var x = (1.5 * r * j) + r + 10;
                 var y = (Math.sqrt(3)/2 * r * i) + r
                 Hex_Positions[Hex_Grid[i][j]] = [x, y];
 
@@ -205,7 +205,7 @@ drawHexGrid(Hex_Grid);
 
 for (var i = 0; i < Hex_Positions.length; i++) {
     if (Hex_Positions[i]) {
-        Hex_Rotations[i] = Math.floor(Math.random() * 6);
+        Hex_Rotations[i] = 0;//Math.floor(Math.random() * 6);
     }
 }
 
