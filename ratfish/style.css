@@ -11,3 +11,45 @@ a:link, a:visited, a:hover, a:active {
     color: black;
     text-decoration: none;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.header, .sidebar, .main, .content, .messages, .message-input {
+    border: 1px solid gray;
+}
+
+.header {
+    padding-left: 20px;
+}
+
+.main {
+    flex-grow: 1;
+    display: flex;
+}
+
+.sidebar {
+    width: 300px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+.messages {
+    flex-grow: 1;
+    padding-left: 20px;
+}
+
+.message-input {
+    padding: 20px;
+}
+
+.message-input > input {
+    width: calc(100% - 40px);
+    padding: 20px;
+}
