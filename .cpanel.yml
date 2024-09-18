@@ -1,0 +1,12 @@
+##### THIS ALLOWS US TO DEPLOY THE SITE FROM A GIT REPO ######
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/your-username/public_html/
+    - /bin/cp -R glyphtech $DEPLOYPATH
+    - /bin/cp -R it $DEPLOYPATH
+    - /bin/cp -R ratfish $DEPLOYPATH
+    - /bin/cp style.css $DEPLOYPATH
+    - /bin/cp script.js $DEPLOYPATH
+    - /bin/cp index.html $DEPLOYPATH
+
