@@ -2,7 +2,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/cfedfdcf/nodejs_server/pages/
+    - export DEPLOYPATH=/home/cfedfdcf/public_html/
     - /bin/cp -R glyphtech $DEPLOYPATH
     - /bin/cp -R it $DEPLOYPATH
     - /bin/cp -R ratfish $DEPLOYPATH
