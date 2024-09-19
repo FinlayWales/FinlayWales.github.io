@@ -7,23 +7,54 @@ html, body {
     border: 0px;
 }
 
+html, body, input, textarea {
+    color: #003f50;
+    font-weight: bold;
+    font-size: large;
+}
+
 a:link, a:visited, a:hover, a:active {
     color: black;
     text-decoration: none;
+}
+
+h1, h2, h3 {
+    color: #003f50; 
 }
 
 .container {
     display: flex;
     flex-direction: column;
     height: 100%;
+    background-color: rgb(214, 243, 255)
 }
 
+/*
 .header, .sidebar, .main, .content, .messages, .message-input {
     border: 1px solid gray;
-}
+}*/
 
 .header {
     padding-left: 20px;
+    background-color: lightblue;
+    background: linear-gradient(155deg, rgb(173, 216, 230, 1) 0%, rgb(173, 216, 230, 1) 25%, rgba(0, 63, 80, 1) 100%);
+    display: flex;
+    align-items: baseline;
+}
+
+.header > p {
+    font-size: medium;
+    font-weight: bold;
+    font-style: italic;
+    margin-left: 5px;
+}
+
+.header-border {
+    height: 4px;
+    width: 100%;
+    border-top: 4px solid #ff6f3c;
+    background-color: #ff9a3c;
+    border-bottom: 4px solid #ffc93c;
 }
 
 .main {
@@ -32,12 +63,17 @@ a:link, a:visited, a:hover, a:active {
 }
 
 .sidebar {
-    width: 300px;
+    width: 15%;
+    min-width: 15%;
+    flex-basis: 15%;
+    background-color: lightblue;
+    border-right: 4px solid #ffc93c;
 }
 
 .content {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
 }
 
 .messages {
@@ -46,10 +82,40 @@ a:link, a:visited, a:hover, a:active {
 }
 
 .message-input {
+    display: flex;
+    align-items: flex-start;
     padding: 20px;
 }
 
-.message-input > input {
-    width: calc(100% - 40px);
-    padding: 20px;
+#message-input-box {
+    flex-grow: 1;
+    padding: 15px;
+    border: 2px solid #003f50;
+    background-color: lightblue;
+    border-radius: 4px;
+    outline: none;
+    transition: border 0.1s ease-in-out;
+    resize: none;
+    overflow: hidden;
+}
+
+#message-input-box:focus {
+    border: 2px solid #003f50;
+}
+
+#send-button {
+    aspect-ratio: 1 / 1;
+    border: 2px solid #003f50;
+    border-radius: 4px;
+    background-image: url("assets/send.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: cover;
+    margin-left: 15px;
+    background-color: lightblue;
+    transition: border 0.1s ease-in-out;
+}
+
+#send-button:hover {
+    border: 2px solid #003f50;
 }
