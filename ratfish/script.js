@@ -1,7 +1,7 @@
-// Textbox Resizing
 let messageInputBox = document.getElementById("message-input-box");
 let sendButton = document.getElementById("send-button");
 
+// Textbox Resizing
 sendButton.style.height = messageInputBox.offsetHeight + "px";
 
 messageInputBox.addEventListener("input", function(e) {
@@ -11,6 +11,9 @@ messageInputBox.addEventListener("input", function(e) {
 
 // Socket
 const socket = io();
-socket.on("connect", () => {
-    console.log(socket.id);
+sendButton.addEventListener("click", function(e) {
+    if (messageInputBox.value) {
+        socket.emit('message', messageInputBox.value);
+        messageInputBox.value = '';
+    }
 });
