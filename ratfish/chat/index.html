@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<title>Ratfish</title>
+	<title>Ratfish Chat</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
 	<meta name="description" content="" />
 	<link rel="icon" href="favicon.png">
@@ -11,15 +11,23 @@
 
 <body>
 	<div class="container">
-		<div class="left-border"></div>
-		<div class="main">
+		<div class="header">
 			<h1>Ratfish</h1>
-			<div class="buttons">
-				<a href="/account"><button class="button">Start Game</button></a>
-				<a href="/recovery"><button class="button">Session Recovery</button></a>
+			<p>Chat Room</p>
+		</div>
+		<div class="header-border"></div>
+		<div class="main">
+			<div class="sidebar">
+			</div>
+			<div class="content">
+				<div class="messages" id="message-output">
+				</div>
+				<div class="message-input">
+					<textarea id="message-input-box" rows="1"></textarea>
+					<button id="send-button"></button>
+				</div>
 			</div>
 		</div>
-		<div class="right-border"></div>
 	</div>
 	<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
 	<script src="script.js"></script>
