@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Ratfish | Character Creation</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<meta name="description" content="" />
+	<link rel="icon" href="favicon.png">
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="left-border"></div>
+		<div class="main">
+			<h1>Create Your Character</h1>
+			<div class="form-top">
+				<div class="form-left">
+					<label for="cname">Character name: </label>
+					<input type="text" class="input" id="cname" />
+					<label for="rname">Your name: </label>
+					<input type="text" class="input" id="rname" />
+					<label for="pronouns">Pronouns: </label>
+					<input type="text" class="input" id="pronouns" />
+				</div>
+				<div class="form-right">
+					<label for="pfp">Profile Picture: </label>
+					<div class="pfp-selector">
+						<div id="pfp-image"></div>
+						<label for="pfp-input" id="pfp-input-label">Upload Photo</label>
+						<input type="file" id="pfp-input" />
+					</div>
+				</div>
+			</div>
+			<div class="form-bottom">
+				<label for="bio">Bio: </label>
+				<textarea class="input" id="bio"></textarea>
+				<button class="button">Continue...</button>
+			</div>
+		</div>
+		<div class="right-border"></div>
+	</div>
+	<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+	<script src="script.js"></script>
+</body>
+</html>

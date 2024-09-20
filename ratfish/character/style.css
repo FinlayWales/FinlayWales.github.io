@@ -32,10 +32,11 @@ h1, h2, h3 {
 
 .main {
     display: flex;
+    flex-direction: column;
     flex-grow: 1;
     background: linear-gradient(155deg, rgb(173, 216, 230, 1) 0%, rgb(173, 216, 230, 1) 25%, rgba(0, 63, 80, 1) 100%);
-    justify-content: center;
-    align-items: center;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .left-border {
@@ -52,8 +53,71 @@ h1, h2, h3 {
     border-left: 4px solid #ffc93c;
 }
 
-.content {
+.form-top {
     display: flex;
+    flex-direction: row;
+}
+
+.form-left {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-around;
+}
+
+.form-right {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.pfp-selector {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 15px;
+    border: 2px solid #003f50;
+    background-color: lightblue;
+    border-radius: 4px;
+}
+
+#pfp-input {
+    display: none;
+}
+
+#pfp-input-label {
+    border: 2px solid #003f50;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 4px;
+    background-color: lightblue;
+    transition: background-color 0.1s ease-in-out;
+    flex-shrink: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#pfp-input-label:hover {
+    background-color: #8bcbe0;
+}
+
+#pfp-image {
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    border: 2px solid #003f50;
+    background-image: url("assets/default.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.form-bottom {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding-bottom: 20px;
 }
 
 .button {
@@ -64,10 +128,14 @@ h1, h2, h3 {
     border-radius: 4px;
     background-color: lightblue;
     transition: background-color 0.1s ease-in-out;
-    margin-left: 15px;
 }
+
 .button:hover {
     background-color: #8bcbe0;
+}
+
+label {
+    margin-top: 20px;
 }
 
 .input {
@@ -77,6 +145,12 @@ h1, h2, h3 {
     border-radius: 4px;
     outline: none;
     transition: background-color 0.1s ease-in-out;
+}
+
+textarea.input {
+    resize: none;
+    flex-grow: 1;
+    margin-bottom: 20px;
 }
 
 .input:focus {
