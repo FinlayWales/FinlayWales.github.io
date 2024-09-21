@@ -13,12 +13,18 @@
 	<div class="container">
 		<div class="left-border"></div>
 		<div class="main">
-			<h1>Create Your Character</h1>
+			<div class="header">
+				<h1>Create Your Character</h1>
+				<div class="sessionid-box">
+					<label for="sessionid">Room Code: </label>
+					<input type="text" class="input" id="sessionid" />
+				</div>
+			</div>
 			<div class="form-top">
 				<div class="form-left">
-					<label for="cname">Character name: </label>
+					<label for="cname">Character Name: </label>
 					<input type="text" class="input" id="cname" />
-					<label for="rname">Your name: </label>
+					<label for="rname">Your Name: </label>
 					<input type="text" class="input" id="rname" />
 					<label for="pronouns">Pronouns: </label>
 					<input type="text" class="input" id="pronouns" />
@@ -28,14 +34,14 @@
 					<div class="pfp-selector">
 						<div id="pfp-image"></div>
 						<label for="pfp-input" id="pfp-input-label">Upload Photo</label>
-						<input type="file" id="pfp-input" />
+						<input type="file" id="pfp-input" accept="image/*" />
 					</div>
 				</div>
 			</div>
 			<div class="form-bottom">
 				<label for="bio">Bio: </label>
 				<textarea class="input" id="bio"></textarea>
-				<button class="button">Continue...</button>
+				<button class="button">Continue to Chat Room</button>
 			</div>
 		</div>
 		<div class="right-border"></div>

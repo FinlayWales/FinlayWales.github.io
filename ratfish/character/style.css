@@ -53,6 +53,18 @@ h1, h2, h3 {
     border-left: 4px solid #ffc93c;
 }
 
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sessionid-box {
+    display: flex;
+    flex-direction: column;
+}
+
 .form-top {
     display: flex;
     flex-direction: row;
@@ -108,7 +120,7 @@ h1, h2, h3 {
     border-radius: 50%;
     border: 2px solid #003f50;
     background-image: url("assets/default.png");
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
